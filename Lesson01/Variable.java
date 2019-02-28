@@ -1,6 +1,6 @@
 public class Variable {	
-    public static void main(String[] args) {
 
+    public static void main(String[] args) {
     	byte cores = 2;
     	short ram = 8;
     	int hdd = 200;
