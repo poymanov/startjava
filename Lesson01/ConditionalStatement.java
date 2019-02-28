@@ -3,7 +3,6 @@ public class ConditionalStatement {
     public static void main(String[] args) {
         int age = 25;
         boolean isMale = true;
-        boolean isFemale = false;
         int height = 2;
         char nameFirstChar = 'П';
 
@@ -15,7 +14,7 @@ public class ConditionalStatement {
             System.out.println("Вы мужчина");
         }
 
-        if (isFemale) {
+        if (!isMale) {
             System.out.println("Вы женщина");
         }
 
