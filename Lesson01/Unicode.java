@@ -1,10 +1,7 @@
 public class Unicode {
 
     public static void main(String[] args) {
-        int rangeStart = 9398;
-        int rangeEnd = 10178;
-
-        for(int i = rangeStart; i <= rangeEnd; i++) {
+        for(int i = 9398; i <= 10178; i++) {
             System.out.println((char) i);
         }
     }

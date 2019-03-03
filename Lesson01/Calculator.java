@@ -17,7 +17,7 @@ public class Calculator {
         } else if (operation == '^') {        
             result = 1;
             for(int i = 1; i <= number2; i++) {
-                result = result * number1;
+                result *= number1;
             }           
         } else if (operation == '%') {        
             result = number1 % number2;
