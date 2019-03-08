@@ -5,46 +5,36 @@ public class CalculatorTest {
     public static void main(String[] args) {
         Scanner scan = new Scanner(System.in);
 
-        System.out.println("Enter first number:");    
-        int firstNumber = scan.nextInt();
+        while (true) {
+            System.out.println("Enter first number:");    
+            int firstNumber = scan.nextInt();  
 
-        String continueValue = askContinue(scan);
+            System.out.println("Enter the sign of the mathematical operation:");
+            char operation = scan.next().charAt(0);
 
-        if (continueValue.equals("no")) {
-            return;
-        }
+            System.out.println("Enter second number:");
+            int secondNumber = scan.nextInt();
 
-        System.out.println("Enter the sign of the mathematical operation:");
-        char operation = scan.next().charAt(0);
+            Calculator calculator = new Calculator();
+            calculator.setFirstNumber(firstNumber);
+            calculator.setOperation(operation);
+            calculator.setSecondNumber(secondNumber);
 
-        continueValue = askContinue(scan);
+            int result = calculator.calculate();
 
-        if (continueValue.equals("no")) {
-            return;
-        }
+            System.out.println(calculator.getFirstNumber() + " " + calculator.getOperation() + " " + calculator.getSecondNumber() + " = " + result);
 
-        System.out.println("Enter second number:");
-        int secondNumber = scan.nextInt();
+            String continueValue = "";
 
-        Calculator calculator = new Calculator();
-        calculator.setFirstNumber(firstNumber);
-        calculator.setOperation(operation);
-        calculator.setSecondNumber(secondNumber);
+            System.out.println("Want to continue? [yes/no]");
 
-        int result = calculator.calc();
+            while (!continueValue.equals("yes") && !continueValue.equals("no")) {
+                continueValue = new String(scan.nextLine());
+            }
 
-        System.out.println(calculator.getFirstNumber() + " " + calculator.getOperation() + " " + calculator.getSecondNumber() + " = " + result);
-    }
-
-    private static String askContinue(Scanner scan) {
-        String continueValue = "";
-
-        System.out.println("Want to continue? [yes/no]");
-
-        while (!continueValue.equals("yes") && !continueValue.equals("no")) {
-            continueValue = new String(scan.nextLine());
-        }
-
-        return continueValue;
+            if (continueValue.equals("no")) {
+                break;
+            }
+        }        
     }
 }

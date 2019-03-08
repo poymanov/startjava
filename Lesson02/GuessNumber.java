@@ -3,57 +3,46 @@ import java.util.Scanner;
 public class GuessNumber {
     private Player firstPlayer;
     private Player secondPlayer;
-    private int computerVariant;
+    private int computerNumber;
+    private Player winner;
 
     public GuessNumber(Player firstPlayer, Player secondPlayer) {
         this.firstPlayer = firstPlayer;
         this.secondPlayer = secondPlayer;
     }
 
-    public int getFirstPlayerNumber() {
-        return firstPlayer.getNumber();
+    public void init() {
+        computerNumber = (int) (Math.random() * 101);
+        System.out.println("Guess the number from 0 to 100");
     }
 
-    public int getSecondPlayerNumber() {
-        return secondPlayer.getNumber();
-    }
+    public boolean makeTurn() {
+        Scanner scan = new Scanner(System.in);
 
-    public String getFirstPlayerName() {
-        return firstPlayer.getName();
-    }
+        System.out.println(firstPlayer.getName() + "'s number is:");
+        firstPlayer.setNumber(scan.nextInt());
 
-    public String getSecondPlayerName() {
-        return secondPlayer.getName();
-    }
-
-    public void setFirstPlayerNumber(int number) {
-        firstPlayer.setNumber(number);
-    }
-
-    public void setSecondPlayerNumber(int number) {
-        secondPlayer.setNumber(number);
-    }
-
-    public void start() {
-        computerVariant = (int) (Math.random() * 101);
-        System.out.println("Guess the numbers from 0 to 100");
-    }
-
-    public boolean isAskVariants() {
-        return computerVariant != firstPlayer.getNumber() && computerVariant != secondPlayer.getNumber();
-    }
-
-    public void finish() {
-        System.out.println("Computer variant is: " + computerVariant);
-        System.out.println(firstPlayer.getName() + "'s variant is: " + firstPlayer.getNumber());
-        System.out.println(secondPlayer.getName() + "'s variant is: " + secondPlayer.getNumber());
-
-        if (computerVariant == firstPlayer.getNumber() && computerVariant == secondPlayer.getNumber()) {
-            System.out.println("Draw!");
-        } else if (computerVariant == firstPlayer.getNumber()) {
-            System.out.println(firstPlayer.getName() + " wins!");
-        } else if (computerVariant == secondPlayer.getNumber()) {
-            System.out.println(secondPlayer.getName() + " wins!");
+        if (firstPlayer.getNumber() == computerNumber) {
+            winner = firstPlayer;
+            return true;
         }
+
+        System.out.println(secondPlayer.getName() + "'s number is:");
+        secondPlayer.setNumber(scan.nextInt());
+
+        if (secondPlayer.getNumber() == computerNumber) {
+            winner = secondPlayer;
+            return true;
+        }
+
+        return false;
+    }
+
+    public void results() {
+        System.out.println("Computer number is: " + computerNumber);
+        System.out.println(firstPlayer.getName() + "'s number is: " + firstPlayer.getNumber());
+        System.out.println(secondPlayer.getName() + "'s number is: " + secondPlayer.getNumber());
+
+        System.out.println(winner.getName() + " wins!");
     }
 }

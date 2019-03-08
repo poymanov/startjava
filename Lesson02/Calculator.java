@@ -27,34 +27,26 @@ public class Calculator {
         this.secondNumber = secondNumber;
     }
 
-    public int calc() {
-        int result = 0;
-
+    public int calculate() {
         switch(operation) {
-            case '+':
-                result = firstNumber + secondNumber; 
-                break;
             case '-':
-                result = firstNumber - secondNumber; 
-                break;        
+                return firstNumber - secondNumber;       
             case '*':
-                result = firstNumber * secondNumber; 
-                break;                
+                return firstNumber * secondNumber;             
             case '/':
-                result = firstNumber / secondNumber; 
-                break;    
+                return firstNumber / secondNumber;   
             case '%':
-                result = firstNumber % secondNumber; 
-                break;                            
+                return firstNumber % secondNumber;                            
             case '^':
-                result = 1;
+                int result = 1;
 
                 for(int i = 1; i <= secondNumber; i++) {
                     result *= firstNumber;
-                }             
-                break;                
-        }
+                }
 
-        return result;
+                return result;          
+            default:
+                return firstNumber + secondNumber;     
+        }
     }
 }
