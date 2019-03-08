@@ -37,7 +37,7 @@ public class CalculatorTest {
     }
 
     private static String askContinue(Scanner scan) {
-        String continueValue = new String();
+        String continueValue = "";
 
         System.out.println("Want to continue? [yes/no]");
 

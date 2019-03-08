@@ -1,19 +1,20 @@
 public class JaegerTest {
   
     public static void main(String[] args) {
-        Jaeger jaeger1 = new Jaeger();
-        Jaeger jaeger2 = new Jaeger();
+        Jaeger brawlerYukon = new Jaeger();
+        
+        brawlerYukon.setModelName("Brawler Yukon");
+        brawlerYukon.setMark("Mark-1");
 
-        jaeger1.setModelName("Brawler Yukon");
-        jaeger1.setMark("Mark-1");
+        System.out.println(brawlerYukon.getModelName());
+        System.out.println(brawlerYukon.getMark());
 
-        System.out.println(jaeger1.getModelName());
-        System.out.println(jaeger1.getMark());
+        Jaeger crimsonTyphoon = new Jaeger();
 
-        jaeger2.setModelName("Crimson Typhoon");
-        jaeger2.setMark("Mark-4");
+        crimsonTyphoon.setModelName("Crimson Typhoon");
+        crimsonTyphoon.setMark("Mark-4");
 
-        System.out.println(jaeger2.getModelName());
-        System.out.println(jaeger2.getMark());
+        System.out.println(crimsonTyphoon.getModelName());
+        System.out.println(crimsonTyphoon.getMark());
     }
 }
