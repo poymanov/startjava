@@ -42,23 +42,23 @@ public class GuessNumber {
         }
       }
 
-      System.out.println(firstPlayer.getName() + "'s variant is:");    
+      System.out.println(firstPlayer.getName() + "'s variant is:");
       firstPlayer.setNumber(scan.nextInt());
 
-      System.out.println(secondPlayer.getName() + "'s variant is:");    
+      System.out.println(secondPlayer.getName() + "'s variant is:");
       secondPlayer.setNumber(scan.nextInt());
     }
 
-    System.out.println("Computer variant is: " + computerVariant);  
-    System.out.println(firstPlayer.getName() + "'s variant is: " + firstPlayer.getNumber());  
-    System.out.println(secondPlayer.getName() + "'s variant is: " + secondPlayer.getNumber());  
+    System.out.println("Computer variant is: " + computerVariant);
+    System.out.println(firstPlayer.getName() + "'s variant is: " + firstPlayer.getNumber());
+    System.out.println(secondPlayer.getName() + "'s variant is: " + secondPlayer.getNumber());
 
     if (computerVariant == firstPlayer.getNumber() && computerVariant == secondPlayer.getNumber()) {
-      System.out.println("Draw!"); 
+      System.out.println("Draw!");
     } else if (computerVariant == firstPlayer.getNumber()) {
-      System.out.println(firstPlayer.getName() + " wins!"); 
+      System.out.println(firstPlayer.getName() + " wins!");
     } else if (computerVariant == secondPlayer.getNumber()) {
-      System.out.println(secondPlayer.getName() + " wins!"); 
+      System.out.println(secondPlayer.getName() + " wins!");
     }
   }
 }
