@@ -8,20 +8,17 @@ public class Jaeger {
     private int strength;
     private int armor;
 
+    public Jaeger(String modelName, String mark) {
+        this.modelName = modelName;
+        this.mark = mark;
+    }
+
     public String getModelName() {
         return modelName;
     }
 
-    public void setModelName(String modelName) {
-        this.modelName = modelName;
-    }
-
     public String getMark() {
         return mark;
-    }
-
-    public void setMark(String mark) {
-        this.mark = mark;
     }
 
     public String getOrigin() {
