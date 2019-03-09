@@ -48,6 +48,7 @@ public class Calculator {
 
                 return result;          
             default:
+                System.out.println("The wrong operation sign");
                 return 0;    
         }
     }

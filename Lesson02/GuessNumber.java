@@ -4,7 +4,6 @@ public class GuessNumber {
     private Player firstPlayer;
     private Player secondPlayer;
     private int computerNumber;
-    private Player winner;
 
     public GuessNumber(Player firstPlayer, Player secondPlayer) {
         this.firstPlayer = firstPlayer;
@@ -12,30 +11,28 @@ public class GuessNumber {
     }
 
     public void play() {
-        init();
-
-        boolean hasWinner = false;
-
-        while (!hasWinner) {
-            hasWinner = makeTurn();
-        }
-
-        results();
-    }
-
-    private void init() {
-        computerNumber = (int) (Math.random() * 101);
         System.out.println("Guess the number from 0 to 100");
-    }
-
-    private boolean makeTurn() {
+        generateComputerNumber();
+        boolean endGame = false;
         Scanner scan = new Scanner(System.in);
 
+        while (!endGame) {
+            endGame = makeTurn(scan);
+        }
+
+        printNumbers();
+        printWinner();
+    }
+
+    private void generateComputerNumber() {
+        computerNumber = (int) (Math.random() * 101);
+    }
+
+    private boolean makeTurn(Scanner scan) {        
         System.out.println(firstPlayer.getName() + "'s number is:");
         firstPlayer.setNumber(scan.nextInt());
 
         if (firstPlayer.getNumber() == computerNumber) {
-            winner = firstPlayer;
             return true;
         }
 
@@ -43,7 +40,6 @@ public class GuessNumber {
         secondPlayer.setNumber(scan.nextInt());
 
         if (secondPlayer.getNumber() == computerNumber) {
-            winner = secondPlayer;
             return true;
         }
 
@@ -52,11 +48,21 @@ public class GuessNumber {
         return false;
     }
 
-    private void results() {
+    private void printNumbers() {
         System.out.println("Computer number is: " + computerNumber);
         System.out.println(firstPlayer.getName() + "'s number is: " + firstPlayer.getNumber());
         System.out.println(secondPlayer.getName() + "'s number is: " + secondPlayer.getNumber());
+    }
 
-        System.out.println(winner.getName() + " wins!");
+    private void printWinner() {
+        String winnerName = "";
+
+        if (firstPlayer.getNumber() == computerNumber) {
+            winnerName = firstPlayer.getName();  
+        } else if (secondPlayer.getNumber() == computerNumber) {
+            winnerName = secondPlayer.getName();
+        }   
+
+        System.out.println(winnerName + " wins!");     
     }
 }
