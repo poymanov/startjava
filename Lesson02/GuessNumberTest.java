@@ -12,27 +12,19 @@ public class GuessNumberTest {
         Player secondPlayer = new Player(scan.nextLine());
         
         GuessNumber game = new GuessNumber(firstPlayer, secondPlayer);
-        game.init();
 
-        while (true) {
-            boolean hasWinner = game.makeTurn();
+        String continueValue = "";
+        
+        do {        
+            game.play();            
 
-            if (hasWinner) {
-                game.results();
-                break;
-            }
-
-            String continueValue = "";
+            continueValue = "";
 
             System.out.println("Want to continue? [yes/no]");
 
             while (!continueValue.equals("yes") && !continueValue.equals("no")) {
                 continueValue = scan.nextLine();
             }
-
-            if (continueValue.equals("no")) {
-                break;
-            }
-        }
+        } while (continueValue.equals("yes"));
     }
 }

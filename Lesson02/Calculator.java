@@ -29,6 +29,8 @@ public class Calculator {
 
     public int calculate() {
         switch(operation) {
+            case '+':
+                return firstNumber + secondNumber;                  
             case '-':
                 return firstNumber - secondNumber;       
             case '*':
@@ -46,7 +48,7 @@ public class Calculator {
 
                 return result;          
             default:
-                return firstNumber + secondNumber;     
+                return 0;    
         }
     }
 }

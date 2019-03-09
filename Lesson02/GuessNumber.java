@@ -11,12 +11,24 @@ public class GuessNumber {
         this.secondPlayer = secondPlayer;
     }
 
-    public void init() {
+    public void play() {
+        init();
+
+        boolean hasWinner = false;
+
+        while (!hasWinner) {
+            hasWinner = makeTurn();
+        }
+
+        results();
+    }
+
+    private void init() {
         computerNumber = (int) (Math.random() * 101);
         System.out.println("Guess the number from 0 to 100");
     }
 
-    public boolean makeTurn() {
+    private boolean makeTurn() {
         Scanner scan = new Scanner(System.in);
 
         System.out.println(firstPlayer.getName() + "'s number is:");
@@ -35,10 +47,12 @@ public class GuessNumber {
             return true;
         }
 
+        System.out.println("No one has guessed the number");
+
         return false;
     }
 
-    public void results() {
+    private void results() {
         System.out.println("Computer number is: " + computerNumber);
         System.out.println(firstPlayer.getName() + "'s number is: " + firstPlayer.getNumber());
         System.out.println(secondPlayer.getName() + "'s number is: " + secondPlayer.getNumber());
