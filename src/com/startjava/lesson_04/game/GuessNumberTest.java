@@ -1,0 +1,30 @@
+package com.startjava.lesson_04.game;
+
+import java.util.Scanner;
+
+public class GuessNumberTest {
+
+    public static void main(String[] args) {
+        Scanner scan = new Scanner(System.in);
+
+        System.out.print("First player name is: ");
+        Player firstPlayer = new Player(scan.nextLine());
+
+        System.out.print("Second player name is: ");
+        Player secondPlayer = new Player(scan.nextLine());
+
+        GuessNumber game = new GuessNumber(firstPlayer, secondPlayer);
+
+        String continueValue;
+
+        do {
+            game.play();
+
+            do {
+                System.out.println("Want to continue? [yes/no]");
+                continueValue = scan.nextLine();
+            } while (!continueValue.equals("yes") && !continueValue.equals("no"));
+
+        } while (continueValue.equals("yes"));
+    }
+}
