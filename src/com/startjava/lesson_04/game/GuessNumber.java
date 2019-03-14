@@ -18,10 +18,9 @@ public class GuessNumber {
         System.out.println("You have 10 attempts");
         System.out.println();
 
-        firstPlayer.setNumberVariants(new int[10]);
-        secondPlayer.setNumberVariants(new int[10]);
-
         generateComputerNumber();
+
+        resetPlayersVariants();
 
         Scanner scan = new Scanner(System.in);
 
@@ -39,8 +38,7 @@ public class GuessNumber {
         }
 
         if (winner == null) {
-            System.out.println(firstPlayer.getName() + " has run out of attempts");
-            System.out.println(secondPlayer.getName() + " has run out of attempts");
+            printAttemptsEnding();
         }
 
         printResults(winner, currentAttempt);
@@ -87,10 +85,20 @@ public class GuessNumber {
         System.out.println(player.getName() + "'s variants are: " + Arrays.toString(player.getNumberVariants()));
     }
 
+    private void printAttemptsEnding() {
+        System.out.println(firstPlayer.getName() + " has run out of attempts");
+        System.out.println(secondPlayer.getName() + " has run out of attempts");
+    }
+
     private void addPlayerVariant(Scanner scan, Player player, int attempt) {
         System.out.println(player.getName() + "'s number is: ");
         int playerNumber = scan.nextInt();
         player.setNumber(playerNumber);
         player.addNumberVariant(attempt, playerNumber);
+    }
+
+    private void resetPlayersVariants() {
+        firstPlayer.setNumberVariants(new int[10]);
+        secondPlayer.setNumberVariants(new int[10]);
     }
 }
