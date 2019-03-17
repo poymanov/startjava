@@ -8,15 +8,14 @@ public class Player {
 
     public Player(String name) {
         this.name = name;
-        setDefaults();
     }
 
     public boolean isWinner() {
         return isWinner;
     }
 
-    public void setWinner(boolean winner) {
-        isWinner = winner;
+    public void setWinner(boolean isWinner) {
+        this.isWinner = isWinner;
     }
 
     public int[] getNumbers() {

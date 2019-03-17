@@ -22,7 +22,7 @@ public class GuessNumber {
         System.out.println("You have 10 attempts\n");
 
         generateComputerNumber();
-        resetGameData();
+        initGame();
 
         while (currentAttempt < 10 && !firstPlayer.isWinner() && !secondPlayer.isWinner()) {
             currentAttempt++;
@@ -42,7 +42,7 @@ public class GuessNumber {
         computerNumber = (int) (Math.random() * 101);
     }
 
-    private void resetGameData() {
+    private void initGame() {
         currentAttempt = 0;
         firstPlayer.setDefaults();
         secondPlayer.setDefaults();

@@ -4,22 +4,22 @@ import java.util.Scanner;
 
 public class GuessNumberTest {
 
-    public static void main(String[] args) {
-        Scanner scan = new Scanner(System.in);
+    private static Scanner scan = new Scanner(System.in);
 
-        Player firstPlayer = createPlayer(scan);
-        Player secondPlayer = createPlayer(scan);
+    public static void main(String[] args) {
+        Player firstPlayer = createPlayer();
+        Player secondPlayer = createPlayer();
 
         GuessNumber game = new GuessNumber(firstPlayer, secondPlayer);
-        play(game, scan);
+        start(game);
     }
 
-    private static Player createPlayer(Scanner scan) {
+    private static Player createPlayer() {
         System.out.print("Enter player name: ");
         return new Player(scan.nextLine());
     }
 
-    private static void play(GuessNumber game, Scanner scan) {
+    private static void start(GuessNumber game) {
         String continueValue;
 
         do {
