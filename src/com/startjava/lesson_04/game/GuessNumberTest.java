@@ -11,7 +11,15 @@ public class GuessNumberTest {
         Player secondPlayer = createPlayer(scan);
 
         GuessNumber game = new GuessNumber(firstPlayer, secondPlayer);
+        play(game, scan);
+    }
 
+    private static Player createPlayer(Scanner scan) {
+        System.out.print("Enter player name: ");
+        return new Player(scan.nextLine());
+    }
+
+    private static void play(GuessNumber game, Scanner scan) {
         String continueValue;
 
         do {
@@ -23,10 +31,5 @@ public class GuessNumberTest {
             } while (!continueValue.equals("yes") && !continueValue.equals("no"));
 
         } while (continueValue.equals("yes"));
-    }
-
-    private static Player createPlayer(Scanner scan) {
-        System.out.print("Enter player name: ");
-        return new Player(scan.nextLine());
     }
 }
