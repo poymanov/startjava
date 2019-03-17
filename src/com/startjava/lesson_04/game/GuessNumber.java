@@ -6,83 +6,80 @@ import java.util.Scanner;
 public class GuessNumber {
     private Player firstPlayer;
     private Player secondPlayer;
+    private Scanner scan;
     private int computerNumber;
+    private int currentAttempt;
 
     public GuessNumber(Player firstPlayer, Player secondPlayer) {
         this.firstPlayer = firstPlayer;
         this.secondPlayer = secondPlayer;
+        scan = new Scanner(System.in);
+        currentAttempt = 0;
     }
 
     public void play() {
         System.out.println("Guess the number from 0 to 100");
-        System.out.println("You have 10 attempts");
-        System.out.println();
+        System.out.println("You have 10 attempts\n");
 
         generateComputerNumber();
+        resetGameData();
 
-        resetPlayersVariants();
-
-        Scanner scan = new Scanner(System.in);
-
-        int currentAttempt = 0;
-        Player winner = null;
-
-        while (currentAttempt < 10) {
+        while (currentAttempt < 10 && !firstPlayer.isWinner() && !secondPlayer.isWinner()) {
             currentAttempt++;
 
-            winner = makeTurn(scan, currentAttempt);
-
-            if (winner != null) {
-                break;
-            }
+            makeTurn();
+            addPlayersNumbers();
         }
 
-        if (winner == null) {
+        if (!firstPlayer.isWinner() && !secondPlayer.isWinner()) {
             printAttemptsEnding();
         }
 
-        printResults(winner, currentAttempt);
+        printResults();
     }
 
     private void generateComputerNumber() {
         computerNumber = (int) (Math.random() * 101);
+
+        System.out.println("Computer number is: " + computerNumber);
     }
 
-    private Player makeTurn(Scanner scan, int attempt) {
-        addPlayerVariant(scan, firstPlayer, attempt);
+    private boolean makeTurn() {
+        boolean isFirstPlayerWin = checkWinner(firstPlayer);
 
-        if (firstPlayer.getNumber() == computerNumber) {
-            return firstPlayer;
+        if (isFirstPlayerWin) {
+            return true;
         }
 
-        addPlayerVariant(scan, secondPlayer, attempt);
+        boolean isSecondPlayerWin = checkWinner(secondPlayer);
 
-        if (secondPlayer.getNumber() == computerNumber) {
-            return secondPlayer;
-        };
+        if (isSecondPlayerWin) {
+            return true;
+        }
 
-        return null;
+        return false;
     }
 
-    private void printResults(Player winner, int winnerAttempt) {
-        if (winner == null) {
+    private void printResults() {
+        if (firstPlayer.isWinner() || secondPlayer.isWinner()) {
+            if (firstPlayer.isWinner()) {
+                printWinnerResult(firstPlayer);
+                printPlayerNumbers(secondPlayer);
+            } else {
+                printWinnerResult(secondPlayer);
+                printPlayerNumbers(firstPlayer);
+            }
+
+        } else {
             System.out.println("Computer number is: " + computerNumber);
 
             printPlayerNumbers(firstPlayer);
             printPlayerNumbers(secondPlayer);
-        } else {
-            System.out.println("The " + winner.getName() + " guessed the number " + computerNumber + " with " + winnerAttempt + " attempts");
-
-            if (winner == firstPlayer) {
-                printPlayerNumbers(secondPlayer);
-            } else if (winner == secondPlayer) {
-                printPlayerNumbers(firstPlayer);
-            }
         }
     }
 
     private void printPlayerNumbers(Player player) {
-        System.out.println(player.getName() + "'s variants are: " + Arrays.toString(player.getNumberVariants()));
+        System.out.println(player.getName() + "'s variants are: " + Arrays.toString(player.getNumbers()));
     }
 
     private void printAttemptsEnding() {
@@ -90,15 +87,30 @@ public class GuessNumber {
         System.out.println(secondPlayer.getName() + " has run out of attempts");
     }
 
-    private void addPlayerVariant(Scanner scan, Player player, int attempt) {
-        System.out.println(player.getName() + "'s number is: ");
-        int playerNumber = scan.nextInt();
-        player.setNumber(playerNumber);
-        player.addNumberVariant(attempt, playerNumber);
+    private void addPlayersNumbers() {
+        firstPlayer.addNumberVariant(currentAttempt);
+        secondPlayer.addNumberVariant(currentAttempt);
     }
 
-    private void resetPlayersVariants() {
-        firstPlayer.setNumberVariants(new int[10]);
-        secondPlayer.setNumberVariants(new int[10]);
+    private boolean checkWinner(Player player) {
+        System.out.println(player.getName() + "'s number is: ");
+        player.setCurrentNumber(scan.nextInt());
+
+        if (player.getCurrentNumber() == computerNumber) {
+            player.setWinner(true);
+            return true;
+        }
+
+        return false;
+    }
+
+    private void resetGameData() {
+        currentAttempt = 0;
+        firstPlayer.setDefaults();
+        secondPlayer.setDefaults();
+    }
+
+    private void printWinnerResult(Player player) {
+        System.out.println("The " + player.getName() + " guessed the number " + computerNumber + " with " + currentAttempt + " attempts");
     }
 }

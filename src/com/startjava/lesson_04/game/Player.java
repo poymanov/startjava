@@ -2,35 +2,49 @@ package com.startjava.lesson_04.game;
 
 public class Player {
     private String name;
-    private int number;
-    private int[] numberVariants;
-
-    public int[] getNumberVariants() {
-        return numberVariants;
-    }
-
-    public void setNumberVariants(int[] numberVariants) {
-        this.numberVariants = numberVariants;
-    }
-
-    public void addNumberVariant(int index, int numberVariant) {
-        this.numberVariants[index - 1] = numberVariant;
-    }
+    private int currentNumber;
+    private int[] numbers;
+    private boolean isWinner;
 
     public Player(String name) {
         this.name = name;
-        numberVariants = new int[10];
+        setDefaults();
+    }
+
+    public boolean isWinner() {
+        return isWinner;
+    }
+
+    public void setWinner(boolean winner) {
+        isWinner = winner;
+    }
+
+    public int[] getNumbers() {
+        return numbers;
+    }
+
+    public void setNumbers(int[] numbers) {
+        this.numbers = numbers;
+    }
+
+    public void addNumberVariant(int index) {
+        this.numbers[index - 1] = currentNumber;
     }
 
     public String getName() {
         return name;
     }
 
-    public int getNumber() {
-        return number;
+    public int getCurrentNumber() {
+        return currentNumber;
     }
 
-    public void setNumber(int number) {
-        this.number = number;
+    public void setCurrentNumber(int currentNumber) {
+        this.currentNumber = currentNumber;
+    }
+
+    public void setDefaults() {
+        setWinner(false);
+        setNumbers(new int[10]);
     }
 }
