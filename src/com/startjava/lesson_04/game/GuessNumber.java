@@ -14,7 +14,6 @@ public class GuessNumber {
         this.firstPlayer = firstPlayer;
         this.secondPlayer = secondPlayer;
         scan = new Scanner(System.in);
-        currentAttempt = 0;
     }
 
     public void play() {
@@ -24,11 +23,10 @@ public class GuessNumber {
         generateComputerNumber();
         initGame();
 
-        while (currentAttempt < 10 && !firstPlayer.isWinner() && !secondPlayer.isWinner()) {
+        do {
             currentAttempt++;
-
             makeTurn();
-        }
+        } while (isMakeTurn());
 
         printResults();
     }
@@ -44,22 +42,27 @@ public class GuessNumber {
     }
 
     private void makeTurn() {
-        checkWinner(firstPlayer);
-
-        if (firstPlayer.isWinner()) {
+        if (checkWinner(firstPlayer)) {
             return;
         }
 
         checkWinner(secondPlayer);
     }
 
-    private void checkWinner(Player player) {
+    private boolean isMakeTurn() {
+        return currentAttempt < 10 && !firstPlayer.isWinner() && !secondPlayer.isWinner();
+    }
+
+    private boolean checkWinner(Player player) {
         System.out.println(player.getName() + "'s number is: ");
         player.setCurrentNumber(scan.nextInt(), currentAttempt);
 
         if (player.getCurrentNumber() == computerNumber) {
             player.setWinner(true);
+            return true;
         }
+
+        return false;
     }
 
     private void printResults() {
@@ -82,8 +85,7 @@ public class GuessNumber {
     }
 
     private void printPlayerNumbers(Player player) {
-        int[] attempts = Arrays.copyOf(player.getNumbers(), currentAttempt);
-        System.out.println(player.getName() + "'s variants are: " + Arrays.toString(attempts));
+        System.out.println(player.getName() + "'s variants are: " + Arrays.toString(player.getNumbers(currentAttempt)));
     }
 
     private void printAttemptsEnding() {

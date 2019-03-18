@@ -10,6 +10,7 @@ public class Player {
 
     public Player(String name) {
         this.name = name;
+        numbers = new int[10];
     }
 
     public boolean isWinner() {
@@ -20,8 +21,8 @@ public class Player {
         this.isWinner = isWinner;
     }
 
-    public int[] getNumbers() {
-        return numbers;
+    public int[] getNumbers(int index) {
+        return Arrays.copyOf(numbers, index);
     }
 
     public String getName() {
@@ -39,13 +40,6 @@ public class Player {
 
     public void setDefaults(int index) {
         setWinner(false);
-
-        if (index > 0) {
-            Arrays.fill(numbers, 0, index - 1, 0);
-        } else {
-            numbers = new int[10];
-        }
-
-        System.out.println(Arrays.toString(numbers));
+        Arrays.fill(numbers, 0, index, 0);
     }
 }
