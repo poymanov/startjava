@@ -1,5 +1,7 @@
 package com.startjava.lesson_04.game;
 
+import java.util.Arrays;
+
 public class Player {
     private String name;
     private int currentNumber;
@@ -22,14 +24,6 @@ public class Player {
         return numbers;
     }
 
-    public void setNumbers(int[] numbers) {
-        this.numbers = numbers;
-    }
-
-    public void addNumberVariant(int index) {
-        this.numbers[index - 1] = currentNumber;
-    }
-
     public String getName() {
         return name;
     }
@@ -38,12 +32,20 @@ public class Player {
         return currentNumber;
     }
 
-    public void setCurrentNumber(int currentNumber) {
+    public void setCurrentNumber(int currentNumber, int index) {
         this.currentNumber = currentNumber;
+        this.numbers[index - 1] = currentNumber;
     }
 
-    public void setDefaults() {
+    public void setDefaults(int index) {
         setWinner(false);
-        setNumbers(new int[10]);
+
+        if (index > 0) {
+            Arrays.fill(numbers, 0, index - 1, 0);
+        } else {
+            numbers = new int[10];
+        }
+
+        System.out.println(Arrays.toString(numbers));
     }
 }
